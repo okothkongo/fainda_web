@@ -37,7 +37,14 @@ class Usersignup extends Component {
                 type: 'POST',
                 url:   'http://localhost:5000/api/v0/User/auth',
                 data: userData
-              })      
+              }).done((response, status, jqXHR) => {
+                sessionStorage.setItem('user',
+                  JSON.stringify({
+                    'access-token': jqXHR.getResponseHeader('access-token'),
+                    client: jqXHR.getResponseHeader('client'),
+                    uid: response.data.uid
+                  }));              
+              })    
         }
 
     render() {
