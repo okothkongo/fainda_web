@@ -2,23 +2,55 @@ import React, { Component } from 'react'
 import { Col, Row, Button, Form, FormGroup, Label, Input, Container} from 'reactstrap';
 
 class Usersignup extends Component {
+
+        constructor(props) {
+            super(props)
+            this.state ={
+                firstName:'',
+                lastName:'',
+                phoneNumber: '',
+                email:'',
+                password:'',
+                confirmPassword: ''
+            };
+            this.handleChange =this.handleChange.bind(this);
+            this.handleSubmit= this.handleSubmit.bind(this);
+        }
+
+        handleChange (event) {
+            this.setState({
+                [event.target.name]: event.target.value
+            });
+        }
+        handleSubmit(event) {
+            event.preventDefault();  
+            const userData = {
+                first_name : this.state.firstName,
+                last_name : this.state.lastName,
+                email : this.state.email,
+                phone_number: this.state.phoneNumber,            
+                password: this.state.password,
+                password_confirmation : this.state.confirmPassword
+            }           
+        }
+
     render() {
         return (
             <div>               
                 <Container>  
-                    <Form>         
+                    <Form onSubmit = {this.handleSubmit}>         
 
                     <Row form>
                         <Col md={6}>
                             <FormGroup>
-                            <Label for="firstName">First Name</Label>
-                            <Input type="text" name="firstName"  placeholder="First Name" />
+                            <Label for="firstName">First Name</Label> 
+                            <Input type="text" name="firstName"  placeholder="First Name"   onChange={this.handleChange} />
                             </FormGroup>
                         </Col>
                         <Col md={6}>
                             <FormGroup>
                             <Label for="lastName">Last Name</Label>
-                            <Input type="text" name="lastName"  placeholder="Last Name" />
+                            <Input type="text" name="lastName"  placeholder="Last Name"   onChange={this.handleChange} />
                             </FormGroup>
                         </Col>
                     </Row>        
@@ -26,13 +58,13 @@ class Usersignup extends Component {
                         <Col md={6}>
                             <FormGroup>
                             <Label for="email">Email</Label>
-                            <Input type="email" name="email" placeholder="janedoe@example.com"/>
+                            <Input type="email" name="email" placeholder="janedoe@example.com"   onChange={this.handleChange} />
                             </FormGroup>
                         </Col>
                         <Col md={6}>
                             <FormGroup>
                             <Label for="phoneNumber">Phone Number</Label>
-                            <Input type="text" name="phoneNumber" />
+                            <Input type="text" name="phoneNumber"   onChange={this.handleChange} />
                             </FormGroup>
                         </Col>          
                     </Row>
@@ -40,13 +72,13 @@ class Usersignup extends Component {
                         <Col md={6}>
                             <FormGroup>
                             <Label for="password">Password</Label>
-                            <Input type="password" name="password"/>
+                            <Input type="password" name="password"   onChange={this.handleChange} />
                             </FormGroup>
                         </Col>
                         <Col md={6}>
                             <FormGroup>
                             <Label for="confirmPassword">Confrim Password</Label>
-                            <Input type="password" name="confirmPassword" />
+                            <Input type="password" name="confirmPassword"   onChange={this.handleChange} />
                             </FormGroup>
                         </Col>          
                     </Row>
