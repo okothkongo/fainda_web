@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Col, Row, Button, Form, FormGroup, Label, Input, Container} from 'reactstrap';
+import $ from 'jquery';
 
 class Usersignup extends Component {
 
@@ -31,7 +32,12 @@ class Usersignup extends Component {
                 phone_number: this.state.phoneNumber,            
                 password: this.state.password,
                 password_confirmation : this.state.confirmPassword
-            }           
+            }
+            $.ajax({
+                type: 'POST',
+                url:   'http://localhost:5000/api/v0/User/auth',
+                data: userData
+              })      
         }
 
     render() {
