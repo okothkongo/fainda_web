@@ -13,6 +13,7 @@ class Usersignup extends Component {
                 email:'',
                 password:'',
                 confirmPassword: ''
+            
             };
             this.handleChange =this.handleChange.bind(this);
             this.handleSubmit= this.handleSubmit.bind(this);
@@ -24,7 +25,7 @@ class Usersignup extends Component {
             });
         }
         handleSubmit(event) {
-            event.preventDefault();  
+            event.preventDefault();                    
             const userData = {
                 first_name : this.state.firstName,
                 last_name : this.state.lastName,
@@ -35,15 +36,19 @@ class Usersignup extends Component {
             }
             $.ajax({
                 type: 'POST',
-                url:   'http://localhost:5000/api/v0/User/auth',
+                url:   'https://fainda-api.herokuapp.com//api/v0/User/auth',
                 data: userData
               }).done((response, status, jqXHR) => {
                 sessionStorage.setItem('user',
                   JSON.stringify({
                     'access-token': jqXHR.getResponseHeader('access-token'),
                     client: jqXHR.getResponseHeader('client'),
-                    uid: response.data.uid
-                  }));              
+                    uid: response.data.uid,
+                    firstName: response.data.first_name
+                  }));                            
+                  if (response.status === 'success'){
+                    this.props.history.push('/');
+                  }              
               })    
         }
 
