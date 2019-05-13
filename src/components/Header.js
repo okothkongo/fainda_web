@@ -32,10 +32,6 @@ class Header extends Component {
             <Navbar.Collapse id="responsive-navbar-nav">
               <Nav className="ml-auto">
                 <Link to="/">Home</Link>
-<<<<<<< HEAD
-                <Link to="/user/signup">Register</Link>
-                <Link to="/">Sign in</Link>
-=======
                 <div>
                   {" "}
                   {userSession ? (
@@ -44,7 +40,6 @@ class Header extends Component {
                     <Link to="/user/signup">Register</Link>
                   )}
                 </div>
->>>>>>> e575912f120db3d46ebe2155c811d3bbd03a8aa5
               </Nav>
             </Navbar.Collapse>
           </Navbar>
