@@ -1,9 +1,28 @@
 import React, { Component } from "react";
 import { Navbar, Nav, Col, Row, Dropdown, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import $ from "jquery";
 import "./footer.css";
+
 class Header extends Component {
+  componentDidMount() {
+    $.ajax({
+      type: "GET",
+      url: "http://localhost:5000/api/v0/User/auth/validate_token",
+      dataType: "JSON",
+      headers: JSON.parse(sessionStorage.getItem("user"))
+    });
+  }
+
   render() {
+    const userSession = sessionStorage.getItem("user");
+    const userName = (
+      <Link style={{ paddingLeft: 10 }}>
+        {" "}
+        {JSON.parse(sessionStorage.getItem("user")).first_name}{" "}
+      </Link>
+    );
+
     return (
       <div>
         <div>
@@ -13,8 +32,19 @@ class Header extends Component {
             <Navbar.Collapse id="responsive-navbar-nav">
               <Nav className="ml-auto">
                 <Link to="/">Home</Link>
+<<<<<<< HEAD
                 <Link to="/user/signup">Register</Link>
                 <Link to="/">Sign in</Link>
+=======
+                <div>
+                  {" "}
+                  {userSession ? (
+                    userName
+                  ) : (
+                    <Link to="/user/signup">Register</Link>
+                  )}
+                </div>
+>>>>>>> e575912f120db3d46ebe2155c811d3bbd03a8aa5
               </Nav>
             </Navbar.Collapse>
           </Navbar>
