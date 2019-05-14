@@ -26,7 +26,7 @@ class Usersignin extends Component {
     };
     $.ajax({
       type: "POST",
-      url: "https://fainda-api.herokuapp.com/api/v0/User/auth/signout",
+      url: "https://fainda-api.herokuapp.com/api/v0/User/auth/sign_in",
       data: userSigninData
     }).done((response, status, jqXHR) => {
       sessionStorage.setItem(
@@ -38,10 +38,13 @@ class Usersignin extends Component {
           first_name: response.data.first_name
         })
       );
+      console.log(status)
       if (status === "success") {
         this.props.history.push("/");
+
       }
     });
+    
   }
 
   render() {
