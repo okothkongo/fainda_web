@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import Homepage from "./components/Homepage";
 import Usersignup from "./components/User/Usersignup";
 import Footer from "./components/Footer";
+import Usersignin from "./components/User/Usersignin";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Header />
         <Route exact path="/" component={Homepage} />
         <Route path="/user/signup" component={Usersignup} />
+        <Route path="/user/signin" component={Usersignin} />
         <Footer />
       </Router>
     </div>

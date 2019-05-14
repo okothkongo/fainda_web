@@ -1,5 +1,13 @@
 import React, { Component } from "react";
-import { Navbar, Nav, Col, Row, Dropdown, Container } from "react-bootstrap";
+import {
+  Navbar,
+  Nav,
+  Col,
+  Row,
+  Dropdown,
+  Container,
+  NavDropdown
+} from "react-bootstrap";
 import { Link } from "react-router-dom";
 import $ from "jquery";
 import "./footer.css";
@@ -13,15 +21,18 @@ class Header extends Component {
       headers: JSON.parse(sessionStorage.getItem("user"))
     });
   }
+  userSignout() {
+    $.ajax({
+      type: "POST",
+      url: "http://localhost:5000/api/v0/User/auth/signout",
+      dataType: "JSON",
+      headers: JSON.stringify(sessionStorage.clear("user"))
+    });
+    
+  }
 
   render() {
     const userSession = sessionStorage.getItem("user");
-    const userName = (
-      <Link style={{ paddingLeft: 10 }}>
-        {" "}
-        {JSON.parse(sessionStorage.getItem("user")).first_name}{" "}
-      </Link>
-    );
 
     return (
       <div>
@@ -33,12 +44,26 @@ class Header extends Component {
               <Nav className="ml-auto">
                 <Link to="/">Home</Link>
                 <div>
-                  {" "}
-                  {userSession ? (
-                    userName
-                  ) : (
-                    <Link to="/user/signup">Register</Link>
-                  )}
+                  <div>
+                    {" "}
+                    {userSession ? (
+                      <NavDropdown title={ JSON.parse(sessionStorage.getItem("user")).first_name} id="basic-nav-dropdown">
+                        <NavDropdown.Item onClick={this.userSignout()}>
+                          Logout
+                        </NavDropdown.Item>
+                      </NavDropdown>
+                    ) : (
+                      <NavDropdown title="Account" id="basic-nav-dropdown">
+                        <NavDropdown.Item href="/user/signin">
+                          Login
+                        </NavDropdown.Item>
+                        or
+                        <NavDropdown.Item href="/user/signup">
+                          Sign up
+                        </NavDropdown.Item>
+                      </NavDropdown>
+                    )}
+                  </div>
                 </div>
               </Nav>
             </Navbar.Collapse>
