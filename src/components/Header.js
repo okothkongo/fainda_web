@@ -16,7 +16,7 @@ class Header extends Component {
   componentDidMount() {
     $.ajax({
       type: "GET",
-      url: "https://fainda-api.herokuapp.com/User/auth/validate_token",
+      url: "https://fainda-api.herokuapp.com/api/v0/User/auth/validate_token",
       dataType: "JSON",
       headers: JSON.parse(sessionStorage.getItem("user"))
     });
