@@ -10,7 +10,7 @@ class Adverstiments extends Component {
   }
 
   componentDidMount() {
-    fetch("http://localhost:5000/api/v0/advertisements")
+    fetch("https://fainda-api.herokuapp.com/api/v0/advertisements")
       .then(res => res.json())
       .then(json => {
         this.setState({ adverstiments: json });

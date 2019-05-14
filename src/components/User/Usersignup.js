@@ -43,7 +43,7 @@ class Usersignup extends Component {
     };
     $.ajax({
       type: "POST",
-      url: "http://localhost:5000/api/v0/User/auth",
+      url: "https://fainda-api.herokuapp.com/api/v0/User/auth",
       data: userData
     }).done((response, status, jqXHR) => {
       sessionStorage.setItem(

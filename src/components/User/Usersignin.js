@@ -26,7 +26,7 @@ class Usersignin extends Component {
     };
     $.ajax({
       type: "POST",
-      url: "http://localhost:5000/api/v0/User/auth/signout",
+      url: "https://fainda-api.herokuapp.com/api/v0/User/auth/signout",
       data: userSigninData
     }).done((response, status, jqXHR) => {
       sessionStorage.setItem(
