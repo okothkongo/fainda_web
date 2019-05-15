@@ -47,7 +47,16 @@ class Header extends Component {
                   <div>
                     {" "}
                     {userSession ? (
-                      <NavDropdown title={ JSON.parse(sessionStorage.getItem("user")).first_name} id="basic-nav-dropdown">
+                      <NavDropdown
+                        title={
+                          JSON.parse(sessionStorage.getItem("user")).first_name
+                        }
+                        id="basic-nav-dropdown"
+                      >
+                        <NavDropdown.Item>
+                        <Link to="/advertisement/create" style={{color: 'black'}}>Create Advert</Link>
+                        </NavDropdown.Item>
+
                         <NavDropdown.Item onClick={this.userSignout()}>
                           Logout
                         </NavDropdown.Item>
