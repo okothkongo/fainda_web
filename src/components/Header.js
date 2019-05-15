@@ -10,7 +10,8 @@ import {
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import $ from "jquery";
-import "./footer.css";
+import "../assets/css/header.css";
+import logo from "../assets/img/logo.png";
 
 class Header extends Component {
   componentDidMount() {
@@ -28,36 +29,52 @@ class Header extends Component {
       dataType: "JSON",
       headers: JSON.stringify(sessionStorage.clear("user"))
     });
-    
   }
 
   render() {
     const userSession = sessionStorage.getItem("user");
 
     return (
-      <div>
+      <div id="header">
         <div>
           <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-            <Navbar.Brand href="/">Fainda</Navbar.Brand>
+            <Navbar.Brand>
+              <a href="/">
+                <img src={logo} style={{ width: 50 }} alt="logo" />
+              </a>
+            </Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
               <Nav className="ml-auto">
-                <Link to="/">Home</Link>
+                <Link id="home" to="/">
+                  Home
+                </Link>
+                <Link id="home" to="#">
+                  About
+                </Link>
+                <Link id="home" to="#">
+                  Contacts Us
+                </Link>
                 <div>
                   <div>
                     {" "}
                     {userSession ? (
-                      <NavDropdown title={ JSON.parse(sessionStorage.getItem("user")).first_name} id="basic-nav-dropdown">
-                        <NavDropdown.Item onClick={this.userSignout()}>
+                      <NavDropdown
+                        title={
+                          JSON.parse(sessionStorage.getItem("user")).first_name
+                        }
+                        id="basic-nav-dropdown"
+                      >
+                        <NavDropdown.Item  onClick={this.userSignout()}>
                           Logout
                         </NavDropdown.Item>
                       </NavDropdown>
                     ) : (
-                      <NavDropdown title="Account" id="basic-nav-dropdown">
+                      <NavDropdown title="Account">
                         <NavDropdown.Item href="/user/signin">
                           Login
                         </NavDropdown.Item>
-                        or
+
                         <NavDropdown.Item href="/user/signup">
                           Sign up
                         </NavDropdown.Item>
