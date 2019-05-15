@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Button, Form, FormGroup, Label, Input, Container } from "reactstrap";
 import $ from "jquery";
-
+import "../../assets/css/usersignin.css";
 class Usersignin extends Component {
   constructor(props) {
     super(props);
@@ -19,14 +19,14 @@ class Usersignin extends Component {
   }
   handleSubmit(event) {
     event.preventDefault();
-    const userSigninData= {
+    const userSigninData = {
       email: this.state.email,
 
       password: this.state.password
     };
     $.ajax({
       type: "POST",
-      url: "https://fainda-api.herokuapp.com/api/v0/User/auth/signout",
+      url: "https://fainda-api.herokuapp.com/api/v0/User/auth/sign_in",
       data: userSigninData
     }).done((response, status, jqXHR) => {
       sessionStorage.setItem(
@@ -38,6 +38,7 @@ class Usersignin extends Component {
           first_name: response.data.first_name
         })
       );
+      console.log(status);
       if (status === "success") {
         this.props.history.push("/");
       }
@@ -46,20 +47,25 @@ class Usersignin extends Component {
 
   render() {
     return (
-      <div>
-        <Container>
-          <Form>
+      <div id="signin">
+        <Container style={{ width: 500 }}>
+          <Form onSubmit={this.handleSubmit}>
             <FormGroup>
               <Label for="email">Email</Label>
               <Input
                 type="email"
                 name="email"
                 placeholder="janedoe@example.com"
+                onChange={this.handleChange}
               />
             </FormGroup>
             <FormGroup>
               <Label for="password">Password</Label>
-              <Input type="password" name="password" />
+              <Input
+                type="password"
+                name="password"
+                onChange={this.handleChange}
+              />
             </FormGroup>
             <Button type="submit">Sign in</Button>
           </Form>
