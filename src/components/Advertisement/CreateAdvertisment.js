@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Form from "react-bootstrap/Form";
 import { Container, Button } from "react-bootstrap";
 import { FormGroup, Label, Input } from "reactstrap";
+import $ from "jquery";
 
 class CreateAdvertisment extends Component {
   constructor(props) {
@@ -24,13 +25,23 @@ class CreateAdvertisment extends Component {
   handleSubmit(event) {
     event.preventDefault();
     const advertinfo = {
+      user_id: 1,
       category: this.state.category,
       advert_type: this.state.type,
       model: this.state.model,
       location: this.state.location,
       price: this.state.price
     };
-    console.log(advertinfo);
+    $.ajax({
+      type: "POST",
+      url: "https://fainda-api.herokuapp.com/api/v0/advertisements",
+      data: advertinfo
+    }).done((response, status) => {
+      
+      console.log(status);
+   
+    });
+    
   }
 
   render() {
