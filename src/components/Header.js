@@ -65,7 +65,11 @@ class Header extends Component {
                         }
                         id="basic-nav-dropdown"
                       >
-                        <NavDropdown.Item  onClick={this.userSignout()}>
+                        <NavDropdown.Item>
+                        <Link to="/advertisement/create" style={{color: 'black'}}>Create Advert</Link>
+                        </NavDropdown.Item>
+
+                        <NavDropdown.Item onClick={this.userSignout()}>
                           Logout
                         </NavDropdown.Item>
                       </NavDropdown>
