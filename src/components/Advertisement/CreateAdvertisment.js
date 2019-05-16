@@ -9,18 +9,30 @@ class CreateAdvertisment extends Component {
     super(props);
     this.state = {
       category: "",
-      model: '',
-      type: '',
-      location: '',
-      price: ''
+      model: "",
+      type: "",
+      location: "",
+      price: ""
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
   handleChange(event) {
     this.setState({
       [event.target.name]: event.target.value
     });
+  }
+  componentDidMount() {
+    $.ajax({
+      type: "GET",
+      url: "https://fainda-api.herokuapp.com/api/v0/User/auth/validate_token",
+      dataType: "JSON",
+      headers: JSON.parse(sessionStorage.getItem("user"))
+    }).done((response, status, jqXHR) => { 
+      console.log(sessionStorage);
+    });
+    
   }
   handleSubmit(event) {
     event.preventDefault();
@@ -36,12 +48,7 @@ class CreateAdvertisment extends Component {
       type: "POST",
       url: "https://fainda-api.herokuapp.com/api/v0/advertisements",
       data: advertinfo
-    }).done((response, status) => {
-      
-      console.log(status);
-   
     });
-    
   }
 
   render() {
