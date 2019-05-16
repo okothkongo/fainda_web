@@ -21,6 +21,7 @@ class Header extends Component {
       dataType: "JSON",
       headers: JSON.parse(sessionStorage.getItem("user"))
     });
+    
   }
   userSignout() {
     $.ajax({

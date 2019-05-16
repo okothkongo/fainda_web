@@ -53,9 +53,11 @@ class Usersignup extends Component {
           "access-token": jqXHR.getResponseHeader("access-token"),
           client: jqXHR.getResponseHeader("client"),
           uid: response.data.uid,
-          first_name: response.data.first_name
+          first_name: response.data.first_name,
+          id: response.data.id
         })
       );
+
       this.props.history.push("/");
     });
   }
