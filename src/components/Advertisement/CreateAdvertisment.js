@@ -12,11 +12,16 @@ class CreateAdvertisment extends Component {
       model: "",
       type: "",
       location: "",
-      price: ""
+      price: "",
+      image: null
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.fileChangedHandler= this.fileChangedHandler.bind(this);
   }
+  fileChangedHandler = event => {
+    this.setState({ selectedFile: event.target.files[0] });
+  };
 
   handleChange(event) {
     this.setState({
@@ -29,25 +34,31 @@ class CreateAdvertisment extends Component {
       url: "https://fainda-api.herokuapp.com/api/v0/User/auth/validate_token",
       dataType: "JSON",
       headers: JSON.parse(sessionStorage.getItem("user"))
-    }).done((response, status, jqXHR) => { 
-      console.log(sessionStorage);
-    });
-    
+    }).done((response, status, jqXHR) => {});
   }
   handleSubmit(event) {
     event.preventDefault();
+    const formData = new FormData();
+    formData.append(
+      "myFile",
+      this.state.selectedFile,
+      this.state.selectedFile.name
+    );
     const advertinfo = {
       user_id: 1,
       category: this.state.category,
       advert_type: this.state.type,
       model: this.state.model,
       location: this.state.location,
-      price: this.state.price
+      price: this.state.price,
+      image: formData
     };
     $.ajax({
       type: "POST",
-      url: "https://fainda-api.herokuapp.com/api/v0/advertisements",
+      url: "http://localhost:5000/api/v0/advertisements",
       data: advertinfo
+    }).done((response, status, jqXHR) => {
+      console.log(status);
     });
   }
 
@@ -75,6 +86,11 @@ class CreateAdvertisment extends Component {
             <Label>Price</Label>
             <Input type="text" name="price" onChange={this.handleChange} />
           </FormGroup>
+          <FormGroup>
+            <Label>Image</Label>
+            <Input type="file" name="image" onChange={this.fileChangedHandler} />
+          </FormGroup>
+
           <Button type="submit">Submit</Button>
         </Form>
       </Container>
